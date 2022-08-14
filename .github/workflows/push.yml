@@ -6,7 +6,7 @@ on:
 
 jobs:
   push:
-    runs-on: ubunyu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -15,7 +15,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: viktoriaokman/billy
+          images: ${{ github.repository }}
           tags: |
             type=sha
             type=row,value=latest
