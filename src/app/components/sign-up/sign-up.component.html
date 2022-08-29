@@ -1,0 +1,78 @@
+<div class="title">
+  <h1>Sign up</h1>
+</div>
+
+<div class="form-wrapper" [formGroup]="passwordFormGroup">
+  <mat-form-field class="line-wrapper">
+    <mat-label class="inputName">Email:</mat-label>
+    <input
+      type="email"
+      matInput
+      [formControl]="emailFormControl"
+      [errorStateMatcher]="matcher"
+      class="inputFiled"
+    />
+    <mat-error
+      *ngIf="
+        emailFormControl.hasError('email') &&
+        !emailFormControl.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="line-wrapper">
+    <mat-label class="inputName">First name:</mat-label>
+    <input matInput class="inputFiled" type="text" />
+  </mat-form-field>
+  <mat-form-field class="line-wrapper">
+    <mat-label class="inputName">Last name:</mat-label>
+    <input matInput class="inputFiled" type="text" />
+  </mat-form-field>
+  <mat-form-field class="line-wrapper">
+    <mat-label class="inputName">Password:</mat-label>
+    <input
+      matInput
+      class="inputFiled"
+      [type]="showPassword ? 'text' : 'password'"
+      formControlName="password"
+      (input)="onPasswordInput()"
+    />
+    <mat-icon matSuffix (click)="togglePasswordVisibility()">{{
+      showPassword ? "visibility_off" : "visibility"
+    }}</mat-icon>
+    <mat-error *ngIf="password?.hasError('required')"
+      >Password is required</mat-error
+    >
+    <mat-error *ngIf="password?.hasError('minlength')"
+      >Password must have at least 6 characters</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field class="line-wrapper">
+    <mat-label class="inputName">Confirm Password:</mat-label>
+    <input
+      matInput
+      class="inputFiled"
+      [type]="showConfirmPassword ? 'text' : 'password'"
+      formControlName="password2"
+      (input)="onPasswordInput()"
+    />
+    <mat-icon matSuffix (click)="toggleConfirmPasswordVisibility()">{{
+      showConfirmPassword ? "visibility_off" : "visibility"
+    }}</mat-icon>
+    <mat-error *ngIf="password2?.hasError('required')"
+      >Please confirm your password</mat-error
+    >
+    <mat-error *ngIf="password2?.invalid && !password2?.hasError('required')"
+      >Passwords don't match</mat-error
+    >
+  </mat-form-field>
+
+  <div class="buttons-wrapper">
+    <button mat-raised-button type="submit" color="primary">submit</button>
+    <button mat-raised-button color="primary" routerLink="/login">Login</button>
+  </div>
+</div>

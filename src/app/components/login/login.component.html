@@ -1,0 +1,28 @@
+<div class="title">
+  <h1>Login!</h1>
+</div>
+
+<div class="form-wrapper">
+  <mat-form-field class="line-wrapper">
+    <mat-label class="inputName">User name:</mat-label>
+    <input matInput class="inputFiled" type="text" />
+  </mat-form-field>
+  <mat-form-field class="line-wrapper">
+    <mat-label class="inputName">Password:</mat-label>
+    <input
+      matInput
+      class="inputFiled"
+      [type]="showPassword ? 'text' : 'password'"
+    />
+    <mat-icon matSuffix (click)="togglePasswordVisibility()">{{
+      showPassword ? "visibility_off" : "visibility"
+    }}</mat-icon>
+  </mat-form-field>
+
+  <div class="buttons-wrapper">
+    <button mat-raised-button type="submit" color="primary">Login</button>
+    <button mat-raised-button color="primary" routerLink="/sign-up">
+      Sign up
+    </button>
+  </div>
+</div>

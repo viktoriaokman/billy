@@ -1,0 +1,24 @@
+.title {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.line-wrapper {
+  margin: 10px;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+button {
+  margin: 5px;
+}
