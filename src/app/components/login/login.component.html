@@ -4,13 +4,21 @@
 
 <div class="form-wrapper">
   <mat-form-field class="line-wrapper">
-    <mat-label class="inputName">User name:</mat-label>
-    <input matInput class="inputFiled" type="text" />
+    <mat-label class="inputName">Email:</mat-label>
+    <input
+      matInput
+      #email
+      class="inputFiled"
+      type="text"
+      (keyup.enter)="onEnter(email.value, password.value)"
+    />
   </mat-form-field>
   <mat-form-field class="line-wrapper">
     <mat-label class="inputName">Password:</mat-label>
     <input
       matInput
+      #password
+      (keyup.enter)="onEnter(email.value, password.value)"
       class="inputFiled"
       [type]="showPassword ? 'text' : 'password'"
     />
@@ -20,7 +28,14 @@
   </mat-form-field>
 
   <div class="buttons-wrapper">
-    <button mat-raised-button type="submit" color="primary">Login</button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      (click)="onEnter(email.value, password.value)"
+    >
+      Login
+    </button>
     <button mat-raised-button color="primary" routerLink="/sign-up">
       Sign up
     </button>

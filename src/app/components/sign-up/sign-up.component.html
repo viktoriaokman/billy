@@ -6,6 +6,7 @@
   <mat-form-field class="line-wrapper">
     <mat-label class="inputName">Email:</mat-label>
     <input
+      #email
       type="email"
       matInput
       [formControl]="emailFormControl"
@@ -26,15 +27,16 @@
   </mat-form-field>
   <mat-form-field class="line-wrapper">
     <mat-label class="inputName">First name:</mat-label>
-    <input matInput class="inputFiled" type="text" />
+    <input #firstName matInput class="inputFiled" type="text" />
   </mat-form-field>
   <mat-form-field class="line-wrapper">
     <mat-label class="inputName">Last name:</mat-label>
-    <input matInput class="inputFiled" type="text" />
+    <input #lastName matInput class="inputFiled" type="text" />
   </mat-form-field>
   <mat-form-field class="line-wrapper">
     <mat-label class="inputName">Password:</mat-label>
     <input
+      #passwordFild
       matInput
       class="inputFiled"
       [type]="showPassword ? 'text' : 'password'"
@@ -72,7 +74,21 @@
   </mat-form-field>
 
   <div class="buttons-wrapper">
-    <button mat-raised-button type="submit" color="primary">submit</button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      (click)="
+        onSubmit(
+          email.value,
+          passwordFild.value,
+          firstName.value,
+          lastName.value
+        )
+      "
+    >
+      Submit
+    </button>
     <button mat-raised-button color="primary" routerLink="/login">Login</button>
   </div>
 </div>

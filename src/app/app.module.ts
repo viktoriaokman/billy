@@ -11,6 +11,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ConfigComponent } from './config/config.component';
+import { MainPageComponent } from './components/main-page/main-page/main-page.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +22,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignUpComponent],
+  declarations: [AppComponent, LoginComponent, SignUpComponent, ConfigComponent, MainPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +34,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

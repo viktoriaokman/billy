@@ -11,6 +11,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -41,7 +43,10 @@ export class SignUpComponent implements OnInit {
   public passwordFormGroup: FormGroup;
   public matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {
     this.passwordFormGroup = this.formBuilder.group(
       {
         password: ['', [Validators.required, Validators.minLength(6)]],
@@ -72,6 +77,34 @@ export class SignUpComponent implements OnInit {
     if (this.passwordFormGroup.hasError('passwordMismatch'))
       this.password2?.setErrors([{ passwordMismatch: true }]);
     else this.password2?.setErrors(null);
+  }
+
+  onSubmit(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) {
+    const responses = this.userService.createUser({
+      email,
+      firstName,
+      lastName,
+      password,
+    });
+    responses.subscribe({
+      next: (value) => {
+        console.log({ value });
+      },
+      error: (error) => {
+        if (error.status === 404) {
+          console.log('user not exist');
+        }
+        console.error(error);
+      },
+      complete() {
+        console.log('yay');
+      },
+    });
   }
 }
 
