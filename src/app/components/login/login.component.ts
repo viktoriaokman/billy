@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { ShareDataService } from 'src/app/services/share-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,11 @@ export class LoginComponent implements OnInit {
   public email: string = '';
   public password: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private shareDataService: ShareDataService,
+    private router: Router
+  ) {}
   ngOnInit(): void {}
 
   public togglePasswordVisibility(): void {
@@ -41,6 +47,8 @@ export class LoginComponent implements OnInit {
         return;
       }
       console.log('log in sacsses');
+      this.shareDataService.changeMessage(data);
+      this.router.navigate(['/home']);
     });
   }
 }

@@ -13,16 +13,23 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfigComponent } from './config/config.component';
-import { MainPageComponent } from './components/main-page/main-page/main-page.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'home', component: MainPageComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignUpComponent, ConfigComponent, MainPageComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SignUpComponent,
+    ConfigComponent,
+    MainPageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -12,7 +12,8 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/user';
+import { ShareDataService } from 'src/app/services/share-data.service';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -45,7 +46,9 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private shareDataService: ShareDataService,
+    private router: Router
   ) {
     this.passwordFormGroup = this.formBuilder.group(
       {
@@ -98,13 +101,22 @@ export class SignUpComponent implements OnInit {
       error: (error) => {
         if (error.status === 404) {
           console.log('user not exist');
+          return;
         }
         console.error(error);
+        return;
       },
       complete() {
         console.log('yay');
       },
     });
+    this.shareDataService.changeMessage({
+      email,
+      firstName,
+      lastName,
+      password,
+    });
+    this.router.navigate(['/home']);
   }
 }
 
