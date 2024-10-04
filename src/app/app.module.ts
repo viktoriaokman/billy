@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ConfigComponent } from './config/config.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
@@ -22,28 +22,21 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    SignUpComponent,
-    ConfigComponent,
-    MainPageComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
-    HttpClientModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        SignUpComponent,
+        ConfigComponent,
+        MainPageComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot(appRoutes, { enableTracing: true })], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
